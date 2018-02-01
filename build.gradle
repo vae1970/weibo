@@ -1,0 +1,48 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.10.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("/dev/shm/classes/main/")
+        testOutputDir = file("/dev/shm/classes/test/")
+    }
+}
+
+group = 'top.vae1970'
+buildDir = "target"
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://maven.aliyun.com/mvn/repository/'
+    }
+}
+
+dependencies {
+    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('com.alibaba:fastjson:1.2.44')
+    runtime('org.springframework.boot:spring-boot-devtools')
+    compileOnly('org.projectlombok:lombok')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+bootRun {
+    addResources = true
+}
